@@ -27,3 +27,5 @@ replay_pid*
 .idea/
 *.iml
 
+# maven project build directory
+target/
