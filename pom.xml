@@ -35,6 +35,7 @@
   </properties>
 
   <build>
+    <defaultGoal>clean verify site</defaultGoal>
     <plugins>
       <plugin>
       <groupId>org.apache.maven.plugins</groupId>
