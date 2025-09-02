@@ -29,3 +29,6 @@ replay_pid*
 
 # maven project build directory
 target/
+
+# versions-maven-plugin backup file
+pom.xml.versionsBackup

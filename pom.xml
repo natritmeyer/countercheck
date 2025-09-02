@@ -199,6 +199,39 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>upgrade-all-dependencies</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>use-latest-releases</goal>
+                  <goal>update-properties</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <allowSnapshots>false</allowSnapshots>
+              <allowMajorUpdates>true</allowMajorUpdates>
+              <allowMinorUpdates>true</allowMinorUpdates>
+              <allowIncrementalUpdates>true</allowIncrementalUpdates>
+              <processDependencyManagement>true</processDependencyManagement>
+              <processPluginDependencies>true</processPluginDependencies>
+              <generateBackupPoms>true</generateBackupPoms>
+              <updateDependencies>true</updateDependencies>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <reporting>
     <plugins>
       <plugin>
