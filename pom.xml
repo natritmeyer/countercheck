@@ -283,7 +283,7 @@
         <reportSets>
           <reportSet>
             <reports>
-              <report>test-jxr</report>
+              <report>test-jxr-no-fork</report>
             </reports>
           </reportSet>
         </reportSets>
