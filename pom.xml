@@ -29,6 +29,14 @@
     </developer>
   </developers>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <junit.version>5.13.4</junit.version>
+    <spring.version>6.2.10</spring.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -47,14 +55,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <junit.version>5.13.4</junit.version>
-    <spring.version>6.2.10</spring.version>
-  </properties>
 
   <build>
     <defaultGoal>clean verify site</defaultGoal>
