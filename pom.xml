@@ -4,8 +4,65 @@
   <artifactId>countercheck</artifactId>
   <version>0.0.1</version>
 
+  <name>Countercheck</name>
+  <description>A test automation framework</description>
+  <inceptionYear>2025</inceptionYear>
+  <url>https://github.com/natritmeyer/countercheck</url>
+
+  <scm>
+    <url>https://github.com/natritmeyer/countercheck</url>
+    <connection>scm:git:https://github.com/natritmeyer/countercheck.git</connection>
+    <developerConnection>scm:git:https://github.com/natritmeyer/countercheck.git</developerConnection>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>MIT license</name>
+      <url>https://opensource.org/license/mit</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Nathaniel Ritmeyer</name>
+      <url>https://natritmeyer.com/</url>
+    </developer>
+  </developers>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-site-plugin</artifactId>
+      <version>3.21.0</version>
+    </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.9.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.11.3</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>test-javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
