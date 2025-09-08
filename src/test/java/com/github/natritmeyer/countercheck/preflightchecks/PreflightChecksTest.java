@@ -25,6 +25,10 @@ public class PreflightChecksTest {
   private final String visitsServiceHost;
   private final int visitsServicePort;
   private final String visitsServiceLivenessCheckPath;
+  private final String vetsServiceScheme;
+  private final String vetsServiceHost;
+  private final int vetsServicePort;
+  private final String vetsServiceLivenessCheckPath;
 
   @Autowired
   public PreflightChecksTest(WebTestClient webTestClient,
@@ -37,7 +41,12 @@ public class PreflightChecksTest {
                              @Value("${countercheck.aut.visits-service.scheme}") String visitsServiceScheme,
                              @Value("${countercheck.aut.visits-service.host}") String visitsServiceHost,
                              @Value("${countercheck.aut.visits-service.port}") int visitsServicePort,
-                             @Value("${countercheck.aut.visits-service.liveness-check-path}") String visitsServiceLivenessCheckPath) {
+                             @Value("${countercheck.aut.visits-service.liveness-check-path}") String visitsServiceLivenessCheckPath,
+                             @Value("${countercheck.aut.vets-service.scheme}") String vetsServiceScheme,
+                             @Value("${countercheck.aut.vets-service.host}") String vetsServiceHost,
+                             @Value("${countercheck.aut.vets-service.port}") int vetsServicePort,
+                             @Value("${countercheck.aut.vets-service.liveness-check-path}") String vetsServiceLivenessCheckPath
+                             ) {
     this.webTestClient = webTestClient;
     this.pollForSeconds = pollForSeconds;
     this.pollingIntervalSeconds = pollingIntervalSeconds;
@@ -49,6 +58,10 @@ public class PreflightChecksTest {
     this.visitsServiceHost = visitsServiceHost;
     this.visitsServicePort = visitsServicePort;
     this.visitsServiceLivenessCheckPath = visitsServiceLivenessCheckPath;
+    this.vetsServiceScheme = vetsServiceScheme;
+    this.vetsServiceHost = vetsServiceHost;
+    this.vetsServicePort = vetsServicePort;
+    this.vetsServiceLivenessCheckPath = vetsServiceLivenessCheckPath;
   }
 
   @Test
@@ -57,6 +70,7 @@ public class PreflightChecksTest {
         .atMost(Duration.ofSeconds(pollForSeconds))
         .pollInterval(Duration.ofSeconds(pollingIntervalSeconds))
         .ignoreException(WebClientRequestException.class)
+        .logging()
         .until(() ->
             webTestClient
                 .get()
@@ -79,6 +93,7 @@ public class PreflightChecksTest {
         .atMost(Duration.ofSeconds(pollForSeconds))
         .pollInterval(Duration.ofSeconds(pollingIntervalSeconds))
         .ignoreException(WebClientRequestException.class)
+        .logging()
         .until(() ->
             webTestClient
                 .get()
@@ -88,6 +103,29 @@ public class PreflightChecksTest {
                     .port(visitsServicePort)
                     .path(visitsServiceLivenessCheckPath)
                     .queryParam("petId", "1")
+                    .build())
+                .exchange()
+                .returnResult(Object.class)
+                .getStatus()
+                .value() == 200
+        );
+  }
+
+  @Test
+  public void waitForVetsService() {
+    Awaitility.await("Wait for Vets Service")
+        .atMost(Duration.ofSeconds(pollForSeconds))
+        .pollInterval(Duration.ofSeconds(pollingIntervalSeconds))
+        .ignoreException(WebClientRequestException.class)
+        .logging()
+        .until(() ->
+            webTestClient
+                .get()
+                .uri(builder -> builder
+                    .scheme(vetsServiceScheme)
+                    .host(vetsServiceHost)
+                    .port(vetsServicePort)
+                    .path(vetsServiceLivenessCheckPath)
                     .build())
                 .exchange()
                 .returnResult(Object.class)
