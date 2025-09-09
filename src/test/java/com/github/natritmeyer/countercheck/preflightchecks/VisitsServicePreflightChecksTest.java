@@ -46,7 +46,7 @@ public class VisitsServicePreflightChecksTest {
         .atMost(Duration.ofSeconds(pollForSeconds))
         .pollInterval(Duration.ofSeconds(pollingIntervalSeconds))
         .ignoreException(WebClientRequestException.class)
-        // .logging()
+        .logging()
         .until(() ->
             webTestClient
                 .get()
