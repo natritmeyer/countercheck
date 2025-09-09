@@ -37,6 +37,7 @@
 
     <junit.version>5.13.4</junit.version>
     <spring.version>6.2.10</spring.version>
+    <jackson.version>2.20.0</jackson.version>
   </properties>
 
   <dependencyManagement>
@@ -136,6 +137,20 @@
       <groupId>io.projectreactor.netty</groupId>
       <artifactId>reactor-netty</artifactId>
       <version>1.2.9</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- json parsing -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
