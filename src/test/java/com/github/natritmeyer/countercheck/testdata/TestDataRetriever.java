@@ -9,11 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TestDataRetriever {
+  private final ObjectMapper objectMapper;
+
+  public TestDataRetriever() {
+    this.objectMapper = new ObjectMapper();
+  }
+
   public <T> T fromJsonFile(Resource resource, TypeReference<T> typeReference) {
     try {
       String resourceContentAsString = resource.getContentAsString(Charset.defaultCharset());
-
-      ObjectMapper objectMapper = new ObjectMapper();
       return objectMapper.readValue(resourceContentAsString, typeReference);
     } catch (IOException ioException) {
       throw new RuntimeException(ioException);
