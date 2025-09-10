@@ -32,3 +32,6 @@ target/
 
 # versions-maven-plugin backup file
 pom.xml.versionsBackup
+
+# scratch directory
+scratch/
