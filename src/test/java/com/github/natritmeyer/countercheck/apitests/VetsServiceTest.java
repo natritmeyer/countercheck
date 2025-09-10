@@ -23,7 +23,7 @@ public class VetsServiceTest {
   private final String vetsServiceScheme;
   private final String vetsServiceHost;
   private final int vetsServicePort;
-  private final List<Vet> expectedVetsFromFile;
+  private final List<Vet> expectedVets;
 
   @Autowired
   public VetsServiceTest(TestDataRetriever testDataRetriever,
@@ -37,7 +37,7 @@ public class VetsServiceTest {
     this.vetsServiceHost = vetsServiceHost;
     this.vetsServicePort = vetsServicePort;
 
-    this.expectedVetsFromFile = testDataRetriever.fromJsonFile(expectedVetsFile, new TypeReference<List<Vet>>() {
+    this.expectedVets = testDataRetriever.fromJsonFile(expectedVetsFile, new TypeReference<List<Vet>>() {
     });
   }
 
@@ -73,6 +73,6 @@ public class VetsServiceTest {
         .returnResult()
         .getResponseBody();
 
-    assertThat(actualVets).containsExactlyInAnyOrderElementsOf(expectedVetsFromFile);
+    assertThat(actualVets).containsExactlyInAnyOrderElementsOf(expectedVets);
   }
 }
