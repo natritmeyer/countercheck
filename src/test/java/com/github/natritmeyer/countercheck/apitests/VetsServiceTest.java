@@ -75,4 +75,19 @@ public class VetsServiceTest {
 
     assertThat(actualVets).containsExactlyInAnyOrderElementsOf(expectedVets);
   }
+
+  @Test
+  public void cannotRetrieveIndividualVetDetails() {
+    webTestClient
+        .get()
+        .uri(builder -> builder
+            .scheme(vetsServiceScheme)
+            .host(vetsServiceHost)
+            .port(vetsServicePort)
+            .path(VETS_PATH + "/1")
+            .build())
+        .exchange()
+        .expectStatus()
+        .isNotFound();
+  }
 }
