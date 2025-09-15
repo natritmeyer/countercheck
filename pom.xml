@@ -40,6 +40,8 @@
     <jackson.version>2.20.0</jackson.version>
 
     <surefire.version>3.5.4</surefire.version>
+
+    <opentestreporting.directory>${project.build.directory}/opentestreporting</opentestreporting.directory>
   </properties>
 
   <dependencyManagement>
@@ -92,6 +94,11 @@
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-suite-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-reporting</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -197,6 +204,16 @@
             <goals>
               <goal>active-profiles</goal>
             </goals>
+          </execution>
+          <execution>
+            <id>output-effective-pom</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>effective-pom</goal>
+            </goals>
+            <configuration>
+              <output>effective-pom.xml</output>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -348,6 +365,11 @@
                 <configuration>
                   <skip>false</skip>
                   <test>PreflightChecksSuite</test>
+                  <properties>
+                    <configurationParameters>
+                      junit.platform.reporting.output.dir=${opentestreporting.directory}/preflightchecks
+                    </configurationParameters>
+                  </properties>
                 </configuration>
               </execution>
             </executions>
@@ -375,6 +397,11 @@
                 <configuration>
                   <skip>false</skip>
                   <test>SmokeTestSuite</test>
+                  <properties>
+                    <configurationParameters>
+                      junit.platform.reporting.output.dir=${opentestreporting.directory}/smoketests
+                    </configurationParameters>
+                  </properties>
                 </configuration>
               </execution>
             </executions>
@@ -402,6 +429,11 @@
                 <configuration>
                   <skip>false</skip>
                   <test>ApiTestSuite</test>
+                  <properties>
+                    <configurationParameters>
+                      junit.platform.reporting.output.dir=${opentestreporting.directory}/apitests
+                    </configurationParameters>
+                  </properties>
                 </configuration>
               </execution>
             </executions>

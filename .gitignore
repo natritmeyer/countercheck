@@ -30,6 +30,9 @@ replay_pid*
 # maven project build directory
 target/
 
+# effective pom output
+effective-pom.xml
+
 # versions-maven-plugin backup file
 pom.xml.versionsBackup
 
