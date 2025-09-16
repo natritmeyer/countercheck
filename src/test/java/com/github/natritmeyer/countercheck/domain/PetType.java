@@ -10,6 +10,14 @@ public class PetType {
   @JsonProperty("name")
   private String name;
 
+  public PetType() {
+  }
+
+  public PetType(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   @Override
   public String toString() {
     return "PetType{"
@@ -30,5 +38,13 @@ public class PetType {
   @Override
   public int hashCode() {
     return Objects.hash(id, name);
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
   }
 }

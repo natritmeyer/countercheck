@@ -1,12 +1,15 @@
 package com.github.natritmeyer.countercheck.apitests;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
 import com.github.natritmeyer.countercheck.domain.Owner;
+import com.github.natritmeyer.countercheck.domain.Pet;
 import com.github.natritmeyer.countercheck.domain.PetType;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
+import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -93,6 +96,43 @@ public class CustomersServiceTest {
           .getResponseBody();
 
       assertThat(actualOwners).containsExactlyInAnyOrderElementsOf(expectedOwners);
+    }
+
+    @Test
+    public void canRetrieveIndividualOwnersDetails() {
+      Owner owner = webTestClient
+          .get()
+          .uri(builder ->
+              builder.scheme(customersServiceScheme)
+                  .host(customersServiceHost)
+                  .port(customersServicePort)
+                  .path(OWNERS_PATH + "/1")
+                  .build())
+          .exchange()
+          .expectStatus()
+          .isOk()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      assertSoftly(softly -> {
+        softly.assertThat(owner.getId()).isEqualTo(1);
+        softly.assertThat(owner.getFirstName()).isEqualTo("George");
+        softly.assertThat(owner.getLastName()).isEqualTo("Franklin");
+        softly.assertThat(owner.getAddress()).isEqualTo("110 W. Liberty St.");
+        softly.assertThat(owner.getCity()).isEqualTo("Madison");
+        softly.assertThat(owner.getTelephone()).isEqualTo("6085551023");
+        softly.assertThat(owner.getPets().size()).isEqualTo(1);
+
+        Pet customersPet = owner.getPets().get(0);
+        softly.assertThat(customersPet.getId()).isEqualTo(1);
+        softly.assertThat(customersPet.getName()).isEqualTo("Leo");
+        softly.assertThat(customersPet.getBirthDate()).isEqualTo(LocalDate.of(2010, 9, 7));
+
+        PetType customersPetType = customersPet.getPetType();
+        softly.assertThat(customersPetType.getId()).isEqualTo(1);
+        softly.assertThat(customersPetType.getName()).isEqualTo("cat");
+      });
     }
   }
 }

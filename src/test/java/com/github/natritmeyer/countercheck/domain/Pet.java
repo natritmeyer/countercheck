@@ -20,6 +20,16 @@ public class Pet {
   @JsonProperty("type")
   private PetType petType;
 
+  public Pet() {
+  }
+
+  public Pet(int id, String name, LocalDate birthDate, PetType petType) {
+    this.id = id;
+    this.name = name;
+    this.birthDate = birthDate;
+    this.petType = petType;
+  }
+
   @Override
   public String toString() {
     return "Pet{"
@@ -42,5 +52,21 @@ public class Pet {
   @Override
   public int hashCode() {
     return Objects.hash(id, name, birthDate, petType);
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
+
+  public PetType getPetType() {
+    return petType;
   }
 }
