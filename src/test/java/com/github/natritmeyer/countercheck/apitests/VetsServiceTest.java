@@ -37,7 +37,7 @@ public class VetsServiceTest {
     this.vetsServiceHost = vetsServiceHost;
     this.vetsServicePort = vetsServicePort;
 
-    this.expectedVets = testDataRetriever.fromJsonFile(expectedVetsFile, new TypeReference<List<Vet>>() {
+    this.expectedVets = testDataRetriever.fromJsonFile(expectedVetsFile, new TypeReference<>() {
     });
   }
 
