@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
+import com.github.natritmeyer.countercheck.domain.Owner;
 import com.github.natritmeyer.countercheck.domain.PetType;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CustomersServiceTest {
   private final int customersServicePort;
 
   private final List<PetType> expectedPetTypes;
+  private final List<Owner> expectedOwners;
 
   @Autowired
   public CustomersServiceTest(TestDataRetriever testDataRetriever,
@@ -30,7 +32,8 @@ public class CustomersServiceTest {
                               @Value("${countercheck.aut.customers-service.scheme}") String customersServiceScheme,
                               @Value("${countercheck.aut.customers-service.host}") String customersServiceHost,
                               @Value("${countercheck.aut.customers-service.port}") int customersServicePort,
-                              @Value("classpath:/testdata/api/expectedPetTypes.json") Resource expectedPetTypesFile
+                              @Value("classpath:/testdata/api/expectedPetTypes.json") Resource expectedPetTypesFile,
+                              @Value("classpath:/testdata/api/expectedOwners.json") Resource expectedOwnersFile
   ) {
     this.webTestClient = webTestClient;
     this.customersServiceScheme = customersServiceScheme;
@@ -38,6 +41,8 @@ public class CustomersServiceTest {
     this.customersServicePort = customersServicePort;
 
     this.expectedPetTypes = testDataRetriever.fromJsonFile(expectedPetTypesFile, new TypeReference<>() {
+    });
+    this.expectedOwners = testDataRetriever.fromJsonFile(expectedOwnersFile, new TypeReference<>() {
     });
   }
 
@@ -63,6 +68,31 @@ public class CustomersServiceTest {
           .getResponseBody();
 
       assertThat(actualPetTypes).containsExactlyInAnyOrderElementsOf(expectedPetTypes);
+    }
+  }
+
+  @Nested
+  public class OwnersTests {
+    public static final String OWNERS_PATH = "owners";
+
+    @Test
+    public void canRetrieveListOfOwners() {
+      List<Owner> actualOwners = webTestClient
+          .get()
+          .uri(builder ->
+              builder.scheme(customersServiceScheme)
+                  .host(customersServiceHost)
+                  .port(customersServicePort)
+                  .path(OWNERS_PATH)
+                  .build())
+          .exchange()
+          .expectStatus()
+          .isOk()
+          .expectBodyList(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      assertThat(actualOwners).containsExactlyInAnyOrderElementsOf(expectedOwners);
     }
   }
 }
