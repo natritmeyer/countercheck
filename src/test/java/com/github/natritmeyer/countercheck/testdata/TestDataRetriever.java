@@ -13,6 +13,7 @@ public class TestDataRetriever {
 
   public TestDataRetriever() {
     this.objectMapper = new ObjectMapper();
+    this.objectMapper.findAndRegisterModules();
   }
 
   public <T> T fromJsonFile(Resource resource, TypeReference<T> typeReference) {
