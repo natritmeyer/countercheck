@@ -10,6 +10,7 @@ import com.github.natritmeyer.countercheck.domain.Pet;
 import com.github.natritmeyer.countercheck.domain.PetType;
 import com.github.natritmeyer.countercheck.requestbodies.OwnerRequest;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
@@ -20,6 +21,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class})
 public class CustomersServiceTest {
@@ -170,6 +172,64 @@ public class CustomersServiceTest {
         softly.assertThat(createdOwner.getCity()).isEqualTo(CITY);
         softly.assertThat(createdOwner.getTelephone()).isEqualTo(TELEPHONE);
         softly.assertThat(createdOwner.getPets()).isEmpty();
+      });
+    }
+
+    @Test
+    public void canUpdateOwnerDetails() {
+      OwnerRequest newOwnerRequest = new OwnerRequest(FIRST_NAME, LAST_NAME, ADDRESS, CITY, TELEPHONE);
+
+      // create the owner
+      Owner createdOwner = webTestClient
+          .post()
+          .uri(builder ->
+              builder.scheme(customersServiceScheme)
+                  .host(customersServiceHost)
+                  .port(customersServicePort)
+                  .path(OWNERS_PATH)
+                  .build())
+          .body(BodyInserters.fromValue(newOwnerRequest))
+          .exchange()
+          .expectStatus()
+          .isCreated()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      URI createdOwnerUri = new DefaultUriBuilderFactory()
+          .builder()
+          .scheme(customersServiceScheme)
+          .host(customersServiceHost)
+          .port(customersServicePort)
+          .path(String.format("%s/%s", OWNERS_PATH, createdOwner.getId()))
+          .build();
+
+      // update the owner's details
+      String newAddress = "Bag End, Hobbiton";
+      OwnerRequest updatedOwnerRequest = new OwnerRequest(FIRST_NAME, LAST_NAME, newAddress, CITY, TELEPHONE);
+
+      webTestClient
+          .put()
+          .uri(createdOwnerUri)
+          .body(BodyInserters.fromValue(updatedOwnerRequest))
+          .exchange()
+          .expectStatus()
+          .isNoContent();
+
+      // retrieve the owner
+      Owner updatedOwner = webTestClient
+          .get()
+          .uri(createdOwnerUri)
+          .exchange()
+          .expectStatus()
+          .isOk()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      assertSoftly(softly -> {
+        softly.assertThat(updatedOwner.getId()).isEqualTo(createdOwner.getId());
+        softly.assertThat(updatedOwner.getAddress()).isEqualTo(newAddress);
       });
     }
   }
