@@ -8,8 +8,10 @@ import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
 import com.github.natritmeyer.countercheck.domain.Owner;
 import com.github.natritmeyer.countercheck.domain.Pet;
 import com.github.natritmeyer.countercheck.domain.PetType;
+import com.github.natritmeyer.countercheck.requestbodies.OwnerRequest;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
 
 @SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class})
 public class CustomersServiceTest {
@@ -79,7 +82,7 @@ public class CustomersServiceTest {
     public static final String OWNERS_PATH = "owners";
 
     @Test
-    public void canRetrieveListOfOwners() {
+    public void canRetrieveStartingListOfOwners() {
       List<Owner> actualOwners = webTestClient
           .get()
           .uri(builder ->
@@ -95,7 +98,7 @@ public class CustomersServiceTest {
           .returnResult()
           .getResponseBody();
 
-      assertThat(actualOwners).containsExactlyInAnyOrderElementsOf(expectedOwners);
+      assertThat(actualOwners).containsAll(expectedOwners);
     }
 
     @Test
@@ -132,6 +135,40 @@ public class CustomersServiceTest {
         PetType customersPetType = customersPet.getPetType();
         softly.assertThat(customersPetType.getId()).isEqualTo(1);
         softly.assertThat(customersPetType.getName()).isEqualTo("cat");
+      });
+    }
+
+    @Test
+    public void canCreateNewOwnerWithNoPet() {
+      String firstName = "Sam";
+      String lastName = "Gamgee";
+      String address = "3 Bagshot Row, Hobbiton";
+      String city = "The Shire";
+      String telephone = "123456789012";
+      List<Pet> noPets = new ArrayList<>();
+
+      OwnerRequest newOwnerRequest = new OwnerRequest(firstName, lastName, address, city, telephone, noPets);
+
+      Owner createdOwner = webTestClient
+          .post()
+          .uri(builder ->
+              builder.scheme(customersServiceScheme)
+                  .host(customersServiceHost)
+                  .port(customersServicePort)
+                  .path(OWNERS_PATH)
+                  .build())
+          .body(BodyInserters.fromValue(newOwnerRequest))
+          .exchange()
+          .expectStatus()
+          .isCreated()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      assertSoftly(softly -> {
+        softly.assertThat(createdOwner.getId()).isPositive();
+        softly.assertThat(createdOwner.getFirstName()).isEqualTo(firstName);
+        softly.assertThat(createdOwner.getPets()).isEmpty();
       });
     }
   }
