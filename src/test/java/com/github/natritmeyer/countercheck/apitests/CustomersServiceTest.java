@@ -11,7 +11,6 @@ import com.github.natritmeyer.countercheck.domain.PetType;
 import com.github.natritmeyer.countercheck.requestbodies.OwnerRequest;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -80,6 +79,11 @@ public class CustomersServiceTest {
   @Nested
   public class OwnersTests {
     public static final String OWNERS_PATH = "owners";
+    public static final String FIRST_NAME = "Sam";
+    public static final String LAST_NAME = "Gamgee";
+    public static final String ADDRESS = "3 Bagshot Row, Hobbiton";
+    public static final String CITY = "The Shire";
+    public static final String TELEPHONE = "123456789012";
 
     @Test
     public void canRetrieveStartingListOfOwners() {
@@ -125,7 +129,7 @@ public class CustomersServiceTest {
         softly.assertThat(owner.getAddress()).isEqualTo("110 W. Liberty St.");
         softly.assertThat(owner.getCity()).isEqualTo("Madison");
         softly.assertThat(owner.getTelephone()).isEqualTo("6085551023");
-        softly.assertThat(owner.getPets().size()).isEqualTo(1);
+        softly.assertThat(owner.getPets()).hasSize(1);
 
         Pet customersPet = owner.getPets().get(0);
         softly.assertThat(customersPet.getId()).isEqualTo(1);
@@ -139,15 +143,8 @@ public class CustomersServiceTest {
     }
 
     @Test
-    public void canCreateNewOwnerWithNoPet() {
-      String firstName = "Sam";
-      String lastName = "Gamgee";
-      String address = "3 Bagshot Row, Hobbiton";
-      String city = "The Shire";
-      String telephone = "123456789012";
-      List<Pet> noPets = new ArrayList<>();
-
-      OwnerRequest newOwnerRequest = new OwnerRequest(firstName, lastName, address, city, telephone, noPets);
+    public void canCreateNewOwner() {
+      OwnerRequest newOwnerRequest = new OwnerRequest(FIRST_NAME, LAST_NAME, ADDRESS, CITY, TELEPHONE);
 
       Owner createdOwner = webTestClient
           .post()
@@ -167,7 +164,11 @@ public class CustomersServiceTest {
 
       assertSoftly(softly -> {
         softly.assertThat(createdOwner.getId()).isPositive();
-        softly.assertThat(createdOwner.getFirstName()).isEqualTo(firstName);
+        softly.assertThat(createdOwner.getFirstName()).isEqualTo(FIRST_NAME);
+        softly.assertThat(createdOwner.getLastName()).isEqualTo(LAST_NAME);
+        softly.assertThat(createdOwner.getAddress()).isEqualTo(ADDRESS);
+        softly.assertThat(createdOwner.getCity()).isEqualTo(CITY);
+        softly.assertThat(createdOwner.getTelephone()).isEqualTo(TELEPHONE);
         softly.assertThat(createdOwner.getPets()).isEmpty();
       });
     }
