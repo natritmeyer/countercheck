@@ -3,6 +3,7 @@ package com.github.natritmeyer.countercheck.apitests;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.natritmeyer.countercheck.config.ObjectMapperConfig;
 import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
 import com.github.natritmeyer.countercheck.domain.Vet;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
@@ -14,7 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-@SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class})
+@SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class, ObjectMapperConfig.class})
 public class VetsServiceTest {
   private static final String VETS_PATH = "vets";
   private static final int EXPECTED_NUMBER_OF_VETS = 6;

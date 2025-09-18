@@ -4,11 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.natritmeyer.countercheck.config.ObjectMapperConfig;
 import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
 import com.github.natritmeyer.countercheck.domain.Owner;
 import com.github.natritmeyer.countercheck.domain.Pet;
 import com.github.natritmeyer.countercheck.domain.PetType;
 import com.github.natritmeyer.countercheck.requestbodies.OwnerRequest;
+import com.github.natritmeyer.countercheck.requestbodies.PetRequest;
 import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
 import java.net.URI;
 import java.time.LocalDate;
@@ -23,8 +25,10 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-@SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class})
+@SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class, ObjectMapperConfig.class})
 public class CustomersServiceTest {
+  private static final String OWNERS_PATH = "owners";
+
   private final WebTestClient webTestClient;
   private final String customersServiceScheme;
   private final String customersServiceHost;
@@ -54,7 +58,7 @@ public class CustomersServiceTest {
   }
 
   @Nested
-  public class PetTypesTests {
+  class PetTypesTests {
     public static final String PET_TYPES_PATH = "petTypes";
 
     @Test
@@ -79,13 +83,12 @@ public class CustomersServiceTest {
   }
 
   @Nested
-  public class OwnersTests {
-    public static final String OWNERS_PATH = "owners";
-    public static final String FIRST_NAME = "Sam";
-    public static final String LAST_NAME = "Gamgee";
-    public static final String ADDRESS = "3 Bagshot Row, Hobbiton";
-    public static final String CITY = "The Shire";
-    public static final String TELEPHONE = "123456789012";
+  class OwnersTests {
+    private static final String FIRST_NAME = "Sam";
+    private static final String LAST_NAME = "Gamgee";
+    private static final String ADDRESS = "3 Bagshot Row, Hobbiton";
+    private static final String CITY = "The Shire";
+    private static final String TELEPHONE = "123456789012";
 
     @Test
     public void canRetrieveStartingListOfOwners() {
@@ -230,6 +233,73 @@ public class CustomersServiceTest {
       assertSoftly(softly -> {
         softly.assertThat(updatedOwner.getId()).isEqualTo(createdOwner.getId());
         softly.assertThat(updatedOwner.getAddress()).isEqualTo(newAddress);
+      });
+    }
+  }
+
+  @Nested
+  class OwnershipTests {
+    private static final String FIRST_NAME = "Gandalf";
+    private static final String LAST_NAME = "The Grey";
+    private static final String ADDRESS = "Shadowfax's Saddle";
+    private static final String CITY = "Middle Earth";
+    private static final String TELEPHONE = "987654321098";
+    private static final String PET_NAME = "Gwaihir";
+
+    @Test
+    public void canGiveAnOwnerAPet() {
+      OwnerRequest newOwnerRequest = new OwnerRequest(FIRST_NAME, LAST_NAME, ADDRESS, CITY, TELEPHONE);
+
+      Owner createdOwner = webTestClient
+          .post()
+          .uri(builder ->
+              builder.scheme(customersServiceScheme)
+                  .host(customersServiceHost)
+                  .port(customersServicePort)
+                  .path(OWNERS_PATH)
+                  .build())
+          .body(BodyInserters.fromValue(newOwnerRequest))
+          .exchange()
+          .expectStatus()
+          .isCreated()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      PetRequest gwaihirRequest = new PetRequest(PET_NAME, LocalDate.of(2000, 10, 20), 5);
+
+      webTestClient
+          .post()
+          .uri(builder -> builder
+              .scheme(customersServiceScheme)
+              .host(customersServiceHost)
+              .port(customersServicePort)
+              .path(String.format("%s/%s/pets", OWNERS_PATH, createdOwner.getId()))
+              .build()
+          )
+          .body(BodyInserters.fromValue(gwaihirRequest))
+          .exchange()
+          .expectStatus()
+          .isCreated();
+
+      Owner gandalfOwningGwaihir = webTestClient
+          .get()
+          .uri(builder -> builder
+              .scheme(customersServiceScheme)
+              .host(customersServiceHost)
+              .port(customersServicePort)
+              .path(String.format("%s/%s", OWNERS_PATH, createdOwner.getId()))
+              .build())
+          .exchange()
+          .expectStatus()
+          .isOk()
+          .expectBody(Owner.class)
+          .returnResult()
+          .getResponseBody();
+
+      assertSoftly(softly -> {
+        softly.assertThat(gandalfOwningGwaihir.getPets()).hasSize(1);
+        softly.assertThat(gandalfOwningGwaihir.getPets().get(0).getName()).isEqualTo(PET_NAME);
       });
     }
   }

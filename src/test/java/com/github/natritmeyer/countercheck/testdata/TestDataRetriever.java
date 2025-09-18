@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +12,9 @@ import org.springframework.stereotype.Component;
 public class TestDataRetriever {
   private final ObjectMapper objectMapper;
 
-  public TestDataRetriever() {
-    this.objectMapper = new ObjectMapper();
-    this.objectMapper.findAndRegisterModules();
+  @Autowired
+  public TestDataRetriever(ObjectMapper objectMapper) {
+    this.objectMapper = objectMapper;
   }
 
   public <T> T fromJsonFile(Resource resource, TypeReference<T> typeReference) {

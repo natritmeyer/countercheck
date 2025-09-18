@@ -1,5 +1,6 @@
 package com.github.natritmeyer.countercheck.preflightchecks;
 
+import com.github.natritmeyer.countercheck.config.ObjectMapperConfig;
 import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
 import java.time.Duration;
 import org.awaitility.Awaitility;
@@ -11,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 
-@SpringJUnitConfig(WebTestClientConfig.class)
+@SpringJUnitConfig({WebTestClientConfig.class, ObjectMapperConfig.class})
 @TestPropertySource("classpath:/preflightchecks.properties")
 public class VetsServicePreflightChecksTest {
   private final WebTestClient webTestClient;
