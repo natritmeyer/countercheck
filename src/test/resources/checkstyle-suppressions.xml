@@ -7,5 +7,6 @@
   <suppress files=".*\.java$" checks="MissingJavadocType"/>
   <suppress files=".*\.java$" checks="MissingJavadocMethod"/>
   <suppress files=".*\.java$" checks="LineLength"/>
-  <suppress files=".*(Test|IT)\.java$" checks="AbbreviationAsWordInName"/>
+  <suppress files=".*(Test|IT|Steps)\.java$" checks="AbbreviationAsWordInName"/>
+  <suppress files=".*Steps\.java$" checks="MethodName"/>
 </suppressions>
