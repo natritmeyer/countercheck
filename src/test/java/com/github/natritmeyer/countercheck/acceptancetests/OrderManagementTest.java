@@ -7,6 +7,10 @@ import com.github.natritmeyer.countercheck.ui.pages.HomePage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerDetailsPage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;
 import com.github.natritmeyer.countercheck.ui.pages.RegisterOwnerPage;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.Tracing;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -28,21 +32,38 @@ public class OrderManagementTest {
   private final RegisterOwnerPage registerOwnerPage;
   private final OwnerListPage ownerListPage;
   private final OwnerDetailsPage ownerDetailsPage;
+  private final BrowserContext browserContext;
 
   @Autowired
   public OrderManagementTest(HomePage homePage,
                              RegisterOwnerPage registerOwnerPage,
                              OwnerListPage ownerListPage,
-                             OwnerDetailsPage ownerDetailsPage) {
+                             OwnerDetailsPage ownerDetailsPage,
+                             BrowserContext browserContext) {
     this.homePage = homePage;
     this.registerOwnerPage = registerOwnerPage;
     this.ownerListPage = ownerListPage;
     this.ownerDetailsPage = ownerDetailsPage;
+    this.browserContext = browserContext;
   }
 
   @BeforeEach
   public void setup() {
+    this.browserContext
+        .tracing()
+        .start(new Tracing.StartOptions()
+        .setScreenshots(true)
+        .setSnapshots(true));
+
     this.homePage.load();
+  }
+
+  @AfterEach
+  public void teardown() {
+    this.browserContext
+        .tracing()
+        .stop(new Tracing.StopOptions()
+        .setPath(Paths.get("target/trace.zip")));
   }
 
   @Test

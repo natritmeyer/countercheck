@@ -20,8 +20,4 @@ public class HomePage {
   public void navigateToRegisterNewOwnerPage() {
     this.page.locator("a[ui-sref='ownerNew']").click();
   }
-
-  public Page getPage() {
-    return page;
-  }
 }

@@ -37,6 +37,8 @@ services:
   customers-service:
     image: springcommunity/spring-petclinic-customers-service
     container_name: customers-service
+    environment:
+      - eureka.instance.leaseRenewalIntervalInSeconds=3
     deploy:
       resources:
         limits:
@@ -52,6 +54,8 @@ services:
   visits-service:
     image: springcommunity/spring-petclinic-visits-service
     container_name: visits-service
+    environment:
+      - eureka.instance.leaseRenewalIntervalInSeconds=3
     deploy:
       resources:
         limits:
@@ -67,6 +71,8 @@ services:
   vets-service:
     image: springcommunity/spring-petclinic-vets-service
     container_name: vets-service
+    environment:
+      - eureka.instance.leaseRenewalIntervalInSeconds=3
     deploy:
       resources:
         limits:
@@ -82,6 +88,8 @@ services:
   api-gateway:
     image: springcommunity/spring-petclinic-api-gateway
     container_name: api-gateway
+    environment:
+      - eureka.client.registryFetchIntervalSeconds=3
     deploy:
       resources:
         limits:
@@ -93,6 +101,16 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
+
+  tracing-server:
+    image: openzipkin/zipkin
+    container_name: tracing-server
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    ports:
+      - "9411:9411"
 
   admin-server:
     image: springcommunity/spring-petclinic-admin-server

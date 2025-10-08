@@ -178,6 +178,7 @@
       <groupId>com.microsoft.playwright</groupId>
       <artifactId>playwright</artifactId>
       <version>1.55.0</version>
+      <!-- to use playwright's tracing functionality comment out the scope tag -->
       <scope>test</scope>
     </dependency>
   </dependencies>
