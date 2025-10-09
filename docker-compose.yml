@@ -38,7 +38,7 @@ services:
     image: springcommunity/spring-petclinic-customers-service
     container_name: customers-service
     environment:
-      - eureka.instance.leaseRenewalIntervalInSeconds=3
+      - eureka.instance.leaseRenewalIntervalInSeconds=2
     deploy:
       resources:
         limits:
@@ -55,7 +55,7 @@ services:
     image: springcommunity/spring-petclinic-visits-service
     container_name: visits-service
     environment:
-      - eureka.instance.leaseRenewalIntervalInSeconds=3
+      - eureka.instance.leaseRenewalIntervalInSeconds=2
     deploy:
       resources:
         limits:
@@ -72,7 +72,7 @@ services:
     image: springcommunity/spring-petclinic-vets-service
     container_name: vets-service
     environment:
-      - eureka.instance.leaseRenewalIntervalInSeconds=3
+      - eureka.instance.leaseRenewalIntervalInSeconds=2
     deploy:
       resources:
         limits:
@@ -89,7 +89,7 @@ services:
     image: springcommunity/spring-petclinic-api-gateway
     container_name: api-gateway
     environment:
-      - eureka.client.registryFetchIntervalSeconds=3
+      - eureka.client.registryFetchIntervalSeconds=2
     deploy:
       resources:
         limits:
