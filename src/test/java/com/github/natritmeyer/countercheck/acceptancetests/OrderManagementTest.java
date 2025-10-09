@@ -9,10 +9,13 @@ import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;
 import com.github.natritmeyer.countercheck.ui.pages.RegisterOwnerPage;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Tracing;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MediaType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,18 +55,23 @@ public class OrderManagementTest {
     this.browserContext
         .tracing()
         .start(new Tracing.StartOptions()
-        .setScreenshots(true)
-        .setSnapshots(true));
+            .setScreenshots(true)
+            .setSnapshots(true));
 
     this.homePage.load();
   }
 
   @AfterEach
-  public void teardown() {
+  public void teardown(TestInfo testInfo, TestReporter testReporter) {
+    Path tracePath = Path.of(String.format(
+        "target/playwright-traces/%s_%s.zip",
+        testInfo.getTestClass().get().getSimpleName(),
+        testInfo.getTestMethod().get().getName()));
     this.browserContext
         .tracing()
         .stop(new Tracing.StopOptions()
-        .setPath(Paths.get("target/trace.zip")));
+            .setPath(tracePath));
+    testReporter.publishFile(tracePath, MediaType.parse("application/zip"));
   }
 
   @Test
