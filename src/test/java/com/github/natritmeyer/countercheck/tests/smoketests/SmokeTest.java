@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.smoketests;
+package com.github.natritmeyer.countercheck.tests.smoketests;
 
 import org.junit.jupiter.api.Test;
 

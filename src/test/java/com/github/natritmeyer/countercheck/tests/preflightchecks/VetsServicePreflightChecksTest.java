@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.preflightchecks;
+package com.github.natritmeyer.countercheck.tests.preflightchecks;
 
 import com.github.natritmeyer.countercheck.config.CountercheckConfig;
 import java.time.Duration;

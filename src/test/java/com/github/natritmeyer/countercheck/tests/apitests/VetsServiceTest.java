@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.apitests;
+package com.github.natritmeyer.countercheck.tests.apitests;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

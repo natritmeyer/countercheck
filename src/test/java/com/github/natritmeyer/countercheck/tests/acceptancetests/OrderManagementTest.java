@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.acceptancetests;
+package com.github.natritmeyer.countercheck.tests.acceptancetests;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
