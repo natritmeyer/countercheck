@@ -2,7 +2,7 @@ package com.github.natritmeyer.countercheck.acceptancetests;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-import com.github.natritmeyer.countercheck.ui.config.CountercheckPlaywrightConfig;
+import com.github.natritmeyer.countercheck.config.CountercheckPlaywrightConfig;
 import com.github.natritmeyer.countercheck.ui.pages.HomePage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerDetailsPage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;

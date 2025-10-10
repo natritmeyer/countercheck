@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.config;
+package com.github.natritmeyer.countercheck.config.features;
 
 import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;

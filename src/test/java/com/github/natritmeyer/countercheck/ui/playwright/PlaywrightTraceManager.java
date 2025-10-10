@@ -24,8 +24,8 @@ public class PlaywrightTraceManager {
 
   @Autowired
   public PlaywrightTraceManager(BrowserContext browserContext,
-                                @Value("${countercheck.playwright-tracing-enabled}") boolean tracingEnabled,
-                                @Value("${countercheck.playwright-trace-path}") String tracePath) {
+                                @Value("${countercheck.playwright.tracing.enabled}") boolean tracingEnabled,
+                                @Value("${countercheck.playwright.tracing.output-path}") String tracePath) {
     this.browserContext = browserContext;
     this.tracingEnabled = tracingEnabled;
     this.tracePath = tracePath;

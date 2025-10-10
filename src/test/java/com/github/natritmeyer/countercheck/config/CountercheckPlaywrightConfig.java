@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.ui.config;
+package com.github.natritmeyer.countercheck.config;
 
 import com.github.natritmeyer.countercheck.ui.playwright.CountercheckPlaywrightBrowserType;
 import com.microsoft.playwright.Browser;
@@ -15,8 +15,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+@ComponentScan(basePackages = {
+    "om.github.natritmeyer.countercheck.config",
+    "com.github.natritmeyer.countercheck.ui"
+})
 @PropertySource(value = {"classpath:/playwright.properties"})
-@ComponentScan(basePackages = {"com.github.natritmeyer.countercheck.ui"})
 public class CountercheckPlaywrightConfig {
   private final Playwright playwright;
   private final Browser browser;
@@ -24,7 +27,7 @@ public class CountercheckPlaywrightConfig {
   private final Page page;
 
   @Autowired
-  public CountercheckPlaywrightConfig(@Value("${countercheck.playwright-browser-type}") String playwrightBrowserTypeName) {
+  public CountercheckPlaywrightConfig(@Value("${countercheck.playwright.browser-type}") String playwrightBrowserTypeName) {
     Playwright.CreateOptions createOptions = new Playwright.CreateOptions();
     this.playwright = Playwright.create(createOptions);
 
