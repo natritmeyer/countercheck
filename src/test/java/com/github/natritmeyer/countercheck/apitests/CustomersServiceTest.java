@@ -4,8 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.natritmeyer.countercheck.config.ObjectMapperConfig;
-import com.github.natritmeyer.countercheck.config.WebTestClientConfig;
+import com.github.natritmeyer.countercheck.config.CountercheckConfig;
 import com.github.natritmeyer.countercheck.domain.Owner;
 import com.github.natritmeyer.countercheck.domain.Pet;
 import com.github.natritmeyer.countercheck.domain.PetType;
@@ -25,7 +24,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-@SpringJUnitConfig({WebTestClientConfig.class, TestDataRetriever.class, ObjectMapperConfig.class})
+@SpringJUnitConfig(CountercheckConfig.class)
 public class CustomersServiceTest {
   private static final String OWNERS_PATH = "owners";
 
