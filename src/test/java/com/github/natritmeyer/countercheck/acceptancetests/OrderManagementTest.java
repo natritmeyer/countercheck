@@ -7,12 +7,10 @@ import com.github.natritmeyer.countercheck.ui.pages.HomePage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerDetailsPage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;
 import com.github.natritmeyer.countercheck.ui.pages.RegisterOwnerPage;
+import com.github.natritmeyer.countercheck.ui.playwright.PlaywrightTraceManager;
 import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.Tracing;
-import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MediaType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestReporter;
@@ -36,42 +34,32 @@ public class OrderManagementTest {
   private final OwnerListPage ownerListPage;
   private final OwnerDetailsPage ownerDetailsPage;
   private final BrowserContext browserContext;
+  private final PlaywrightTraceManager playwrightTraceManager;
 
   @Autowired
   public OrderManagementTest(HomePage homePage,
                              RegisterOwnerPage registerOwnerPage,
                              OwnerListPage ownerListPage,
                              OwnerDetailsPage ownerDetailsPage,
-                             BrowserContext browserContext) {
+                             BrowserContext browserContext,
+                             PlaywrightTraceManager playwrightTraceManager) {
     this.homePage = homePage;
     this.registerOwnerPage = registerOwnerPage;
     this.ownerListPage = ownerListPage;
     this.ownerDetailsPage = ownerDetailsPage;
     this.browserContext = browserContext;
+    this.playwrightTraceManager = playwrightTraceManager;
   }
 
   @BeforeEach
   public void setup() {
-    this.browserContext
-        .tracing()
-        .start(new Tracing.StartOptions()
-            .setScreenshots(true)
-            .setSnapshots(true));
-
+    this.playwrightTraceManager.startTrace();
     this.homePage.load();
   }
 
   @AfterEach
   public void teardown(TestInfo testInfo, TestReporter testReporter) {
-    Path tracePath = Path.of(String.format(
-        "target/playwright-traces/%s_%s.zip",
-        testInfo.getTestClass().get().getSimpleName(),
-        testInfo.getTestMethod().get().getName()));
-    this.browserContext
-        .tracing()
-        .stop(new Tracing.StopOptions()
-            .setPath(tracePath));
-    testReporter.publishFile(tracePath, MediaType.parse("application/zip"));
+    this.playwrightTraceManager.stopTrace(testInfo, testReporter);
   }
 
   @Test

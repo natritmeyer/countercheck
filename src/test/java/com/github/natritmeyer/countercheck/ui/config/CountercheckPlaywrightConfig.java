@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource(value = {"classpath:/playwright.properties"})
-@ComponentScan(basePackages = {"com.github.natritmeyer.countercheck.ui.pages"})
+@ComponentScan(basePackages = {"com.github.natritmeyer.countercheck.ui"})
 public class CountercheckPlaywrightConfig {
   private final Playwright playwright;
   private final Browser browser;
