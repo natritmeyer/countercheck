@@ -8,7 +8,6 @@ import com.github.natritmeyer.countercheck.ui.pages.OwnerDetailsPage;
 import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;
 import com.github.natritmeyer.countercheck.ui.pages.RegisterOwnerPage;
 import com.github.natritmeyer.countercheck.ui.playwright.PlaywrightTraceManager;
-import com.microsoft.playwright.BrowserContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,6 @@ public class OrderManagementTest {
   private final RegisterOwnerPage registerOwnerPage;
   private final OwnerListPage ownerListPage;
   private final OwnerDetailsPage ownerDetailsPage;
-  private final BrowserContext browserContext;
   private final PlaywrightTraceManager playwrightTraceManager;
 
   @Autowired
@@ -41,13 +39,11 @@ public class OrderManagementTest {
                              RegisterOwnerPage registerOwnerPage,
                              OwnerListPage ownerListPage,
                              OwnerDetailsPage ownerDetailsPage,
-                             BrowserContext browserContext,
                              PlaywrightTraceManager playwrightTraceManager) {
     this.homePage = homePage;
     this.registerOwnerPage = registerOwnerPage;
     this.ownerListPage = ownerListPage;
     this.ownerDetailsPage = ownerDetailsPage;
-    this.browserContext = browserContext;
     this.playwrightTraceManager = playwrightTraceManager;
   }
 
