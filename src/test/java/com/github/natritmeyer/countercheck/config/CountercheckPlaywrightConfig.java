@@ -1,6 +1,6 @@
 package com.github.natritmeyer.countercheck.config;
 
-import com.github.natritmeyer.countercheck.ui.playwright.CountercheckPlaywrightBrowserType;
+import com.github.natritmeyer.countercheck.support.playwright.CountercheckPlaywrightBrowserType;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
@@ -16,8 +16,9 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan(basePackages = {
-    "om.github.natritmeyer.countercheck.config",
-    "com.github.natritmeyer.countercheck.ui"
+    "com.github.natritmeyer.countercheck.config",
+    "com.github.natritmeyer.countercheck.support",
+    "com.github.natritmeyer.countercheck.model.pages"
 })
 @PropertySource(value = {"classpath:/playwright.properties"})
 public class CountercheckPlaywrightConfig {

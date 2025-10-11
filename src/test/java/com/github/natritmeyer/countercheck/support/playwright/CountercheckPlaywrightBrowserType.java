@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.ui.playwright;
+package com.github.natritmeyer.countercheck.support.playwright;
 
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;

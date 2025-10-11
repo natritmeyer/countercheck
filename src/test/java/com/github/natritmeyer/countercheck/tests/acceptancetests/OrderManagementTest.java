@@ -3,11 +3,11 @@ package com.github.natritmeyer.countercheck.tests.acceptancetests;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 import com.github.natritmeyer.countercheck.config.CountercheckPlaywrightConfig;
-import com.github.natritmeyer.countercheck.ui.pages.HomePage;
-import com.github.natritmeyer.countercheck.ui.pages.OwnerDetailsPage;
-import com.github.natritmeyer.countercheck.ui.pages.OwnerListPage;
-import com.github.natritmeyer.countercheck.ui.pages.RegisterOwnerPage;
-import com.github.natritmeyer.countercheck.ui.playwright.PlaywrightTraceManager;
+import com.github.natritmeyer.countercheck.model.pages.HomePage;
+import com.github.natritmeyer.countercheck.model.pages.OwnerDetailsPage;
+import com.github.natritmeyer.countercheck.model.pages.OwnerListPage;
+import com.github.natritmeyer.countercheck.model.pages.RegisterOwnerPage;
+import com.github.natritmeyer.countercheck.support.playwright.PlaywrightTraceManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

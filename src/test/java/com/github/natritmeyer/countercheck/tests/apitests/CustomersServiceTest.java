@@ -5,12 +5,12 @@ import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.natritmeyer.countercheck.config.CountercheckConfig;
-import com.github.natritmeyer.countercheck.domain.Owner;
-import com.github.natritmeyer.countercheck.domain.Pet;
-import com.github.natritmeyer.countercheck.domain.PetType;
-import com.github.natritmeyer.countercheck.requestbodies.OwnerRequest;
-import com.github.natritmeyer.countercheck.requestbodies.PetRequest;
-import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
+import com.github.natritmeyer.countercheck.model.domain.Owner;
+import com.github.natritmeyer.countercheck.model.domain.Pet;
+import com.github.natritmeyer.countercheck.model.domain.PetType;
+import com.github.natritmeyer.countercheck.model.requestbodies.OwnerRequest;
+import com.github.natritmeyer.countercheck.model.requestbodies.PetRequest;
+import com.github.natritmeyer.countercheck.support.testdata.TestDataRetriever;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;

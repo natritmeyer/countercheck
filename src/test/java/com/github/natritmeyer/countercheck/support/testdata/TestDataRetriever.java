@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.testdata;
+package com.github.natritmeyer.countercheck.support.testdata;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

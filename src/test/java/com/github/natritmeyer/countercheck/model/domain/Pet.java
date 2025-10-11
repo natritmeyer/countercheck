@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.domain;
+package com.github.natritmeyer.countercheck.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.natritmeyer.countercheck.config.CountercheckConfig;
-import com.github.natritmeyer.countercheck.domain.Vet;
-import com.github.natritmeyer.countercheck.testdata.TestDataRetriever;
+import com.github.natritmeyer.countercheck.model.domain.Vet;
+import com.github.natritmeyer.countercheck.support.testdata.TestDataRetriever;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

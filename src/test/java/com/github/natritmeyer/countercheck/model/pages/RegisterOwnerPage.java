@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.ui.pages;
+package com.github.natritmeyer.countercheck.model.pages;
 
 import com.microsoft.playwright.Page;
 import org.springframework.beans.factory.annotation.Autowired;

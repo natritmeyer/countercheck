@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.ui.playwright;
+package com.github.natritmeyer.countercheck.support.playwright;
 
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Tracing;
