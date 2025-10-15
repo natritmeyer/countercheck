@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = {
     "com.github.natritmeyer.countercheck.config.features",
     "com.github.natritmeyer.countercheck.support.testdata",
+    "com.github.natritmeyer.countercheck.support.network",
     "com.github.natritmeyer.countercheck.model.domain",
     "com.github.natritmeyer.countercheck.model.requestbodies"
 })
