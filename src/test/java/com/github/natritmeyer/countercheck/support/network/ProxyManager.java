@@ -25,7 +25,7 @@ public class ProxyManager {
     this.proxyPassword = proxyPassword;
   }
 
-  public boolean proxyRequired() {
+  public boolean isProxyRequired() {
     return this.proxyRequired;
   }
 

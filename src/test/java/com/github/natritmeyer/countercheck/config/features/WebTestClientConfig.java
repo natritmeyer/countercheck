@@ -34,7 +34,7 @@ public class WebTestClientConfig {
         .responseTimeout(Duration.ofSeconds(timeoutSeconds))
         .proxyWhen((httpClientConfig, spec) -> {
           log.debug("Proxy config: {}", this.proxyManager.toString());
-          if (this.proxyManager.proxyRequired()) {
+          if (this.proxyManager.isProxyRequired()) {
             return Mono.justOrEmpty(spec
                 .type(ProxyProvider.Proxy.HTTP)
                 .host(this.proxyManager.getProxyHost())
