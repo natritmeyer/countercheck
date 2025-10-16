@@ -100,7 +100,7 @@ public class CountercheckPlaywrightConfig {
   private Browser.NewContextOptions createNewContextOptions() {
     Browser.NewContextOptions newContextOptions = new Browser.NewContextOptions();
 
-    log.info("HTTP Auth config: {}", this.httpAuthManager.toString());
+    log.debug("HTTP Auth config: {}", this.httpAuthManager.toString());
     newContextOptions.setRecordVideoDir(Path.of("target/video"));
 
     if (this.httpAuthManager.isHttpAuthRequired()) {
