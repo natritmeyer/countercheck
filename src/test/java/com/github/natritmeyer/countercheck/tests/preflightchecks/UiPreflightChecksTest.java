@@ -1,8 +1,9 @@
 package com.github.natritmeyer.countercheck.tests.preflightchecks;
 
-import com.github.natritmeyer.countercheck.config.CountercheckConfig;
+import com.github.natritmeyer.countercheck.config.CountercheckApiTestConfig;
 import java.time.Duration;
 import org.awaitility.Awaitility;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
@@ -10,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 
-@SpringJUnitConfig(CountercheckConfig.class)
+@SpringJUnitConfig(CountercheckApiTestConfig.class)
 @TestPropertySource("classpath:/preflightchecks.properties")
 public class UiPreflightChecksTest {
   private final WebTestClient webTestClient;
@@ -38,6 +39,7 @@ public class UiPreflightChecksTest {
     this.uiServiceLivenessCheckPath = uiServiceLivenessCheckPath;
   }
 
+  @Test
   public void waitForUi() {
     Awaitility.await("Wait for UI Service")
         .atMost(Duration.ofSeconds(pollForSeconds))

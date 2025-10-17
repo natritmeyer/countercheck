@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.config.features;
+package com.github.natritmeyer.countercheck.config.common;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

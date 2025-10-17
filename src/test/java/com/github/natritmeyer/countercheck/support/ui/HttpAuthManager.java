@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.support.network;
+package com.github.natritmeyer.countercheck.support.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

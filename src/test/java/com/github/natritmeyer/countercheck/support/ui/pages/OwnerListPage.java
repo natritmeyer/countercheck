@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.model.pages;
+package com.github.natritmeyer.countercheck.support.ui.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;

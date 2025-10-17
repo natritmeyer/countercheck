@@ -1,4 +1,4 @@
-package com.github.natritmeyer.countercheck.model.requestbodies;
+package com.github.natritmeyer.countercheck.support.api.requestbodies;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

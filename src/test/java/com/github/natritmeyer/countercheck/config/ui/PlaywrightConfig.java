@@ -1,8 +1,8 @@
-package com.github.natritmeyer.countercheck.config;
+package com.github.natritmeyer.countercheck.config.ui;
 
-import com.github.natritmeyer.countercheck.support.network.HttpAuthManager;
-import com.github.natritmeyer.countercheck.support.network.ProxyManager;
-import com.github.natritmeyer.countercheck.support.playwright.CountercheckPlaywrightBrowserType;
+import com.github.natritmeyer.countercheck.support.common.ProxyManager;
+import com.github.natritmeyer.countercheck.support.ui.CountercheckPlaywrightBrowserType;
+import com.github.natritmeyer.countercheck.support.ui.HttpAuthManager;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
@@ -16,18 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan(basePackages = {
-    "com.github.natritmeyer.countercheck.config",
-    "com.github.natritmeyer.countercheck.support",
-    "com.github.natritmeyer.countercheck.model.pages"
-})
 @PropertySource(value = {"classpath:/playwright.properties"})
-public class CountercheckPlaywrightConfig {
+public class PlaywrightConfig {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   private final Playwright playwright;
@@ -38,9 +32,9 @@ public class CountercheckPlaywrightConfig {
   private final HttpAuthManager httpAuthManager;
 
   @Autowired
-  public CountercheckPlaywrightConfig(@Value("${countercheck.playwright.browser-type}") String playwrightBrowserTypeName,
-                                      ProxyManager proxyManager,
-                                      HttpAuthManager httpAuthManager) {
+  public PlaywrightConfig(@Value("${countercheck.playwright.browser-type}") String playwrightBrowserTypeName,
+                          ProxyManager proxyManager,
+                          HttpAuthManager httpAuthManager) {
     this.proxyManager = proxyManager;
     this.httpAuthManager = httpAuthManager;
 

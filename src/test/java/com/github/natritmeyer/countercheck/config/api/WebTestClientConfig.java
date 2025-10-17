@@ -1,6 +1,6 @@
-package com.github.natritmeyer.countercheck.config.features;
+package com.github.natritmeyer.countercheck.config.api;
 
-import com.github.natritmeyer.countercheck.support.network.ProxyManager;
+import com.github.natritmeyer.countercheck.support.common.ProxyManager;
 import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

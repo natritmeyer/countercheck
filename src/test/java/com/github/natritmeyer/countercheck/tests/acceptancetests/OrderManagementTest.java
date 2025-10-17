@@ -2,12 +2,12 @@ package com.github.natritmeyer.countercheck.tests.acceptancetests;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-import com.github.natritmeyer.countercheck.config.CountercheckPlaywrightConfig;
-import com.github.natritmeyer.countercheck.model.pages.HomePage;
-import com.github.natritmeyer.countercheck.model.pages.OwnerDetailsPage;
-import com.github.natritmeyer.countercheck.model.pages.OwnerListPage;
-import com.github.natritmeyer.countercheck.model.pages.RegisterOwnerPage;
-import com.github.natritmeyer.countercheck.support.playwright.PlaywrightTraceManager;
+import com.github.natritmeyer.countercheck.config.CountercheckUiTestConfig;
+import com.github.natritmeyer.countercheck.support.ui.PlaywrightTraceManager;
+import com.github.natritmeyer.countercheck.support.ui.pages.HomePage;
+import com.github.natritmeyer.countercheck.support.ui.pages.OwnerDetailsPage;
+import com.github.natritmeyer.countercheck.support.ui.pages.OwnerListPage;
+import com.github.natritmeyer.countercheck.support.ui.pages.RegisterOwnerPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(CountercheckPlaywrightConfig.class)
+@SpringJUnitConfig(CountercheckUiTestConfig.class)
 public class OrderManagementTest {
   private static final String FIRST_NAME = "Legolas";
   private static final String LAST_NAME = "Greenleaf";

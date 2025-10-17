@@ -4,13 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.natritmeyer.countercheck.config.CountercheckConfig;
-import com.github.natritmeyer.countercheck.model.domain.Owner;
-import com.github.natritmeyer.countercheck.model.domain.Pet;
-import com.github.natritmeyer.countercheck.model.domain.PetType;
-import com.github.natritmeyer.countercheck.model.requestbodies.OwnerRequest;
-import com.github.natritmeyer.countercheck.model.requestbodies.PetRequest;
-import com.github.natritmeyer.countercheck.support.testdata.TestDataRetriever;
+import com.github.natritmeyer.countercheck.config.CountercheckApiTestConfig;
+import com.github.natritmeyer.countercheck.support.api.domain.Owner;
+import com.github.natritmeyer.countercheck.support.api.domain.Pet;
+import com.github.natritmeyer.countercheck.support.api.domain.PetType;
+import com.github.natritmeyer.countercheck.support.api.requestbodies.OwnerRequest;
+import com.github.natritmeyer.countercheck.support.api.requestbodies.PetRequest;
+import com.github.natritmeyer.countercheck.support.common.TestDataRetriever;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +24,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-@SpringJUnitConfig(CountercheckConfig.class)
+@SpringJUnitConfig(CountercheckApiTestConfig.class)
 public class CustomersServiceTest {
   private static final String OWNERS_PATH = "owners";
 
