@@ -41,6 +41,29 @@ To run the example tests against Spring PetClinic you'll also need Docker instal
 
 ## Usage
 
+## Phases
+
+Countercheck execution takes a four-phase approach.
+
+1. 🛫 **Pre-flight checks** - wait for the AUT to be in a state ready for testing (e.g. API health checks are responding)
+2. 💨 **Smoke tests** - check whether the AUT is working enough to be worth running tests against (e.g. is login possible)
+3. 🔨 **API tests** - test the APIs
+4. 🙋‍♂️ **Acceptance tests** - test that the AUT works from a user's perspective
+
+Each phase is made up of the following:
+
+* A maven profile (configured in the `pom.xml` file under `/project`)
+* A JUnit5 Suite class (located in `src/test/java/com/natritmeyer/countercheck/tests/suites`)
+* A collection of JUnit5 test classes (located in `src/test/java/com/natritmeyer/countercheck/tests/[suite name]`)
+
+### Execution order
+
+The phases will execute in the order they're defined in the `pom.xml` file. This is standard maven functionality.
+
+### How to customise the phases
+
+Adding your own phase is trivial.
+
 ## Opinionated configurations
 
 Countercheck is an opinionated framework; it enforces best practices where it can. However, should you want some flexibility these settings can be easily disabled/reconfigured.
@@ -70,29 +93,6 @@ Configuration found in the `pom.xml` file:
 * **Active profile display** - The `maven-help-plugin` is configured to output a list of active maven profiles. Since test phases are controlled by profiles, you're essentially getting a list of the test phases being executed in this run.
 * **Effective POM generator** - Every maven execution will generate an `effective-pom.xml` file which is useful when debugging maven configuration problems.
 * **Dependency version information**
-
-## Phases
-
-Countercheck execution takes a four-phase approach.
-
-1. 🛫 **Pre-flight checks** - wait for the AUT to be in a state ready for testing (e.g. API health checks are responding)
-2. 💨 **Smoke tests** - check whether the AUT is working enough to be worth running tests against (e.g. is login possible)
-3. 🔨 **API tests** - test the APIs
-4. 🙋‍♂️ **Acceptance tests** - test that the AUT works from a user's perspective
-
-Each phase is made up of the following:
-
-* A maven profile (configured in the `pom.xml` file under `/project`)
-* A JUnit5 Suite class (located in `src/test/java/com/natritmeyer/countercheck/tests/suites`)
-* A collection of JUnit5 test classes (located in `src/test/java/com/natritmeyer/countercheck/tests/[suite name]`)
-
-### Execution order
-
-The phases will execute in the order they're defined in the `pom.xml` file. This is standard maven functionality.
-
-### How to customise the phases
-
-Adding your own phase is trivial.
 
 ## Reporting
 
