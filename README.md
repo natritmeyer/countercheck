@@ -54,9 +54,22 @@ Before tests are executed countercheck will run a collection of checks, and will
 * 📄 **Checkstyle** - Checkstyle will verify whether your code meets the `google_checks.xml` style rules and fails the build on any warning. The configuration can be found in the `maven-checkstyle-plugin` section of the `pom.xml` file.
 * 📄 **Toolchain versions** - The `maven-enforcer-plugin` is configured to check for minimum versions of java and maven.
 
-## Diagnostics output
+### Diagnostics output
 
-###
+Countercheck configuration is set up with the approach that when a test execution run fails, the more information you have about what happened the better.
+
+#### Maven
+
+Configuration found in `.mvn/maven.config`:
+
+* **Maven version information** - Each maven execution will begin its console output with details of the maven instance being used (version, home, associated java version)
+* **Timestamped console output** - Every line of maven console output is timestamped
+
+Configuration found in the `pom.xml` file:
+
+* **Active profile display** - The `maven-help-plugin` is configured to output a list of active maven profiles. Since test phases are controlled by profiles, you're essentially getting a list of the test phases being executed in this run.
+* **Effective POM generator** - Every maven execution will generate an `effective-pom.xml` file which is useful when debugging maven configuration problems.
+* **Dependency version information**
 
 ## Phases
 
