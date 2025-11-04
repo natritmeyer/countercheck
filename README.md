@@ -60,6 +60,21 @@ Each phase is made up of the following:
 
 The phases will execute in the order they're defined in the `pom.xml` file. This is standard maven functionality.
 
+The current order is:
+
+1. `preflightchecks`
+2. `smoketests`
+3. `apitests`
+4. `acceptancetests`
+
+These can be run individually, e.g:
+
+`mvn -P apitests`
+
+They can also be run in arbitrary collections, e.g:
+
+`mvn -P preflightchecks,apitests`
+
 ### How to customise the phases
 
 Adding your own phase is trivial.
