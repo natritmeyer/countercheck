@@ -67,11 +67,11 @@ The current order is:
 3. `apitests`
 4. `acceptancetests`
 
-These can be run individually, e.g:
+Phases can be run individually, e.g:
 
 `mvn -P apitests`
 
-They can also be run in arbitrary collections, e.g:
+Phases can also be run in arbitrary collections, e.g:
 
 `mvn -P preflightchecks,apitests`
 
