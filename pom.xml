@@ -215,6 +215,16 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>3.28.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.9.8.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>3.9.0</version>
         </plugin>
@@ -377,6 +387,47 @@
         <configuration>
           <skip>true</skip>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <configuration>
+          <includeTests>true</includeTests>
+          <printFailingErrors>true</printFailingErrors>
+          <includeXmlInReports>true</includeXmlInReports>
+          <linkXRef>true</linkXRef>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <includeTests>true</includeTests>
+          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
+          <xmlOutput>true</xmlOutput>
+          <htmlOutput>true</htmlOutput>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <includeTests>true</includeTests>
+          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
+          <skipEmptyReport>false</skipEmptyReport>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>spotbugs</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -617,6 +668,10 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.12.0</version>
         <configuration>
@@ -639,6 +694,24 @@
             <reports>
               <report>report-only</report>
               <report>failsafe-report-only</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <includeTests>true</includeTests>
+          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
+          <skipEmptyReport>false</skipEmptyReport>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>spotbugs</report>
             </reports>
           </reportSet>
         </reportSets>
