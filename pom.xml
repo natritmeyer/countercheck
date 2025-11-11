@@ -411,13 +411,10 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <configuration>
           <includeTests>true</includeTests>
-          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
           <xmlOutput>true</xmlOutput>
           <htmlOutput>true</htmlOutput>
           <effort>Max</effort>
           <threshold>Low</threshold>
-          <includeTests>true</includeTests>
-          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
           <skipEmptyReport>false</skipEmptyReport>
         </configuration>
         <executions>
@@ -705,7 +702,6 @@
           <effort>Max</effort>
           <threshold>Low</threshold>
           <includeTests>true</includeTests>
-          <testClassFilesDirectory>${project.build.testOutputDirectory}</testClassFilesDirectory>
           <skipEmptyReport>false</skipEmptyReport>
         </configuration>
         <reportSets>
