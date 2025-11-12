@@ -110,6 +110,16 @@ request timeout simply override the value on the command line:
 Playwright-specific config can be found in `src/test/resources/playwright.properties`. To enable/disable playwright
 tracing set the `countercheck.playwright.tracing.enabled` value.
 
+#### Report generation
+
+To generate reports post-execution run the following:
+
+`$ mvn site`
+
+The HTML reports are found in `target/site/index.html`
+
+For further details see below.
+
 #### Best practices
 
 * To ensure test execution independence, always begin execution with `clean`, e.g. `mvn clean test`
