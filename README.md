@@ -100,14 +100,15 @@ To generate pretty reports in the `target/site` directory, use the `mvn site` co
 
 Countercheck is made up of many components, each of which contributes low-level information, mainly to the console output, that can help diagnosing difficult issues.
 
-| Type                                                  |Component| Usage                                               |
-|-------------------------------------------------------|--|-----------------------------------------------------|
-| 🖥️ Each line timestamped                             | `.mvn/maven.config` setting | Diagnose timing issues                              |
-| 🖥️ Java &amp; Maven version at top of console output | `.mvn/maven.config` setting | Diagnose version mismatches                         |
-| 🖥️ Planned phase execution                           | `maven-help-plugin` config| Ensure expected phases are selected for execution   |
-| 🖥️ Effective POM                                     | `maven-help-plugin` config| Diagnose dependency &amp; plugin version mismatches |
-| 🖥️ Dependency &amp; plugin versions                  |`versions-maven-plugin` config| Ensure expected versions                            |
-| 🖥️ Available dependency &amp; plugin updates         |`versions-maven-plugin` config|Be aware of required framework maintenance|
+| Type                                                  | Component                        | Usage                                               |
+|-------------------------------------------------------|----------------------------------|-----------------------------------------------------|
+| 🖥️ Each line timestamped                             | `.mvn/maven.config` setting      | Diagnose timing issues                              |
+| 🖥️ Java &amp; Maven version at top of console output | `.mvn/maven.config` setting      | Diagnose version mismatches                         |
+| 🖥️ Planned phase execution                           | `maven-help-plugin` config       | Ensure expected phases are selected for execution   |
+| 🖥️ Effective POM                                     | `maven-help-plugin` config       | Diagnose dependency &amp; plugin version mismatches |
+| 🖥️ Dependency &amp; plugin versions                  | `versions-maven-plugin` config   | Ensure expected versions                            |
+| 🖥️ Dependency tree                                   | `maven-dependency-plugin` config | Diagnose (transient dependency) version mismatch    |
+| 🖥️ Available dependency &amp; plugin updates         | `versions-maven-plugin` config   | Be aware of required framework maintenance          |
 
 ## Removing the demo
 
