@@ -3,6 +3,7 @@
 -----
 
 # Countercheck
+
 _An example test automation framework built with Java, Junit5, Spring, WebTestClient, & Playwright_
 
 > "The reasoning of mortals is worthless, and our designs are likely to fail."
@@ -14,7 +15,8 @@ _An example test automation framework built with Java, Junit5, Spring, WebTestCl
 Countercheck has a couple of intended uses:
 
 1. 🏃‍➡️ A hit-the-ground-running drop-in solution for people needing a Java-based test automation framework
-2. ⚙️ An example of how a framework can be structured that can be used as a reference when putting together your own solution
+2. ⚙️ An example of how a framework can be structured that can be used as a reference when putting together your own
+   solution
 
 ### Features
 
@@ -35,19 +37,15 @@ Countercheck has a couple of intended uses:
 
 ## Toolchain requirements
 
-Countercheck is set up to install its toolchain dependencies using SDKMAN. If you've got it installed simply run `sdk env install` and you'll have everything you need.
+Countercheck is set up to install its toolchain dependencies using SDKMAN. If you've got it installed simply run
+`sdk env install` and you'll have everything you need.
 
 Otherwise, install java &amp; maven however you like.
 
-### Defaults
-
-* Java 24
-* Maven 3.9.11
-
-### Minimum versions
-
-* Java 17
-* Maven 3.6.3
+| Tool  | Default version | Minimum version |
+|-------|-----------------|-----------------|
+| Java  | 24              | 17              |
+| Maven | 3.9.11          | 3.6             |
 
 #### Changing toolchain versions
 
@@ -84,7 +82,8 @@ If you're running countercheck for the first time and want to see it in action, 
 Countercheck execution takes a four-phase approach.
 
 1. 🛫 **Pre-flight checks** - wait for the AUT to be in a state ready for testing (e.g. API health checks are responding)
-2. 💨 **Smoke tests** - check whether the AUT is working enough to be worth running tests against (e.g. is login possible)
+2. 💨 **Smoke tests** - check whether the AUT is working enough to be worth running tests against (e.g. is login
+   possible)
 3. 🔨 **API tests** - test the APIs
 4. 🙋‍♂️ **Acceptance tests** - test that the AUT works from a user's perspective
 
@@ -123,20 +122,24 @@ Countercheck comes with extensive reporting at both high and low levels.
 
 #### 📊 High level reporting
 
-Raw test execution reports are found post-execution in the `target` directory, e.g. `target/surefire-reports` or `target/playwright-traces`; these are designed to be ingested and evaluated by your CI/CD tooling (e.g. Jenkins) for build decisioning.
+Raw test execution reports are found post-execution in the `target` directory, e.g. `target/surefire-reports` or
+`target/playwright-traces`; these are designed to be ingested and evaluated by your CI/CD tooling (e.g. Jenkins) for
+build decisioning.
 
-To generate pretty reports in the `target/site` directory, use the `mvn site` command after your build completes (often performed in a pipeline script's 'after' block). The top level report that links the rest is `target/site/index.html`.
+To generate pretty reports in the `target/site` directory, use the `mvn site` command after your build completes (often
+performed in a pipeline script's 'after' block). The top level report that links the rest is `target/site/index.html`.
 
-| Report              | Description                                                                            |
-|---------------------|----------------------------------------------------------------------------------------
+| Report              | Description                                                                              |
+|---------------------|------------------------------------------------------------------------------------------
 | 📊 Surefire         | Test results from `**/*Test.java` classes executed by `$ mvn test` (JUnit/cucumber etc)  |
 | 📊 Failsafe         | Test results from `**/*IT.java` classes executed by `$ mvn verify`  (JUnit/cucumber etc) |
 | 📝 Playwright trace | Test execution traces in `target/playwright-traces`
-| 📹 Playwright video | Recorded test execution videos in `target/playwright-video`                            |
+| 📹 Playwright video | Recorded test execution videos in `target/playwright-video`                              |
 
 #### 🔬 Low-level reporting
 
-Countercheck is made up of many components, each of which contributes low-level information, mainly to the console output, that can help diagnosing difficult issues.
+Countercheck is made up of many components, each of which contributes low-level information, mainly to the console
+output, that can help diagnosing difficult issues.
 
 | Type                                                  | Component                        | Usage                                               |
 |-------------------------------------------------------|----------------------------------|-----------------------------------------------------|
@@ -150,14 +153,15 @@ Countercheck is made up of many components, each of which contributes low-level 
 
 ## Test code quality components &amp; maintenance
 
-Countercheck includes various tools that enable the measurement and enforcement of high quality test code. Some checks fail the build, others don't.
+Countercheck includes various tools that enable the measurement and enforcement of high quality test code. Some checks
+fail the build, others don't.
 
-| Tool             | Purpose | Fails build |
-|------------------|---------|-----------|
-| 🔨Maven Enforcer |Ensures minimum Java/Maven versions | ✅         |
-| ✔️ Checkstyle    |Ensures `google_checks` code style conformance | ✅         |
-| 🔍 PMD           | Static analysis | ❌         |
-| 🔍 SpotBugs      |Static analysis | ❌         |
+| Tool             | Purpose                                        | Fails build |
+|------------------|------------------------------------------------|-------------|
+| 🔨Maven Enforcer | Ensures minimum Java/Maven versions            | ✅           |
+| ✔️ Checkstyle    | Ensures `google_checks` code style conformance | ✅           |
+| 🔍 PMD           | Static analysis                                | ❌           |
+| 🔍 SpotBugs      | Static analysis                                | ❌           |
 
 ## Removing the demo
 
