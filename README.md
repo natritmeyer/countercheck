@@ -33,9 +33,38 @@ Countercheck has a couple of intended uses:
 * Use of dependency injection (framework broken down into separate concerns)
 * Pushes best practice in test case design
 
-## Installation
+## Toolchain requirements
 
-You'll need a recent version of Java and Maven. There's sdkman config that'll install Java 25 and Maven 3.9.11.
+Countercheck is set up to install its toolchain dependencies using SDKMAN. If you've got it installed simply run `sdk env install` and you'll have everything you need.
+
+Otherwise, install java &amp; maven however you like.
+
+### Defaults
+
+* Java 24
+* Maven 3.9.11
+
+### Minimum versions
+
+* Java 17
+* Maven 3.6.3
+
+#### Changing toolchain versions
+
+Set the following `pom.xml` values:
+
+* `properties/java.version` to 17
+* `requireJavaVersion/version` to 17
+* `requireMavenVersion/version` to 3.6
+
+Set the `.sdkmanrc` file contents to:
+
+```properties
+java=17.0.17-tem
+maven=3.6.3
+```
+
+NB: You'll need to remove the `.mvn/jvm.config` file.
 
 To run the example tests against Spring PetClinic you'll also need Docker installed.
 

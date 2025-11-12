@@ -135,7 +135,7 @@ public class CustomersServiceTest {
         softly.assertThat(owner.getTelephone()).isEqualTo("6085551023");
         softly.assertThat(owner.getPets()).hasSize(1);
 
-        Pet customersPet = owner.getPets().getFirst();
+        Pet customersPet = owner.getPets().get(0);
         softly.assertThat(customersPet.getId()).isEqualTo(1);
         softly.assertThat(customersPet.getName()).isEqualTo("Leo");
         softly.assertThat(customersPet.getBirthDate()).isEqualTo(LocalDate.of(2010, 9, 7));
@@ -298,7 +298,7 @@ public class CustomersServiceTest {
 
       assertSoftly(softly -> {
         softly.assertThat(gandalfOwningGwaihir.getPets()).hasSize(1);
-        softly.assertThat(gandalfOwningGwaihir.getPets().getFirst().getName()).isEqualTo(PET_NAME);
+        softly.assertThat(gandalfOwningGwaihir.getPets().get(0).getName()).isEqualTo(PET_NAME);
       });
     }
   }
