@@ -31,6 +31,12 @@ Countercheck has a couple of intended uses:
 * Use of dependency injection (framework broken down into separate concerns)
 * Pushes best practice in test case design
 
+## Installation
+
+1. Clone this repo
+2. Delete the `.git` directory
+3. Push the code to your own repo and customise as required
+
 ## Toolchain requirements
 
 Countercheck is set up to install its toolchain dependencies using SDKMAN. If you've got it installed simply run
