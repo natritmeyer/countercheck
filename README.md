@@ -62,7 +62,7 @@ java=17.0.17-tem
 maven=3.6.3
 ```
 
-NB: You'll need to remove the `.mvn/jvm.config` file.
+NB: You'll need to remove the `.mvn/jvm.config` file if your java version is < 24.
 
 To run the example tests against Spring PetClinic you'll also need Docker installed.
 
