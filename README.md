@@ -132,7 +132,7 @@ Countercheck includes various tools that enable the measurement and enforcement 
 
 ## Removing the demo
 
-Countercheck is shipped with demo tests against Spring Petclinic. To remove that stuff you need to delete:
+Countercheck ships with demo tests against Spring Petclinic. To remove the demo, delete the following:
 
 * The `/docker-compose.yml` file
 * The `manage-example-spring-petclinic-services` profile from the `pom.xml` file
