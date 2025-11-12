@@ -26,7 +26,7 @@ Countercheck has a couple of intended uses:
 * Multi-phase test execution
 * Multi-environment execution
 * Test data management
-* Extensive reporting & crime scene management
+* Extensive high &amp; low level reporting
 
 ### Design decisions
 
