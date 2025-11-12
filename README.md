@@ -119,6 +119,17 @@ Countercheck is made up of many components, each of which contributes low-level 
 | 🖥️ Dependency tree                                   | `maven-dependency-plugin` config | Diagnose (transient dependency) version mismatch    |
 | 🖥️ Available dependency &amp; plugin updates         | `versions-maven-plugin` config   | Be aware of required framework maintenance          |
 
+## Test code quality components &amp; maintenance
+
+Countercheck includes various tools that enable the measurement and enforcement of high quality test code. Some checks fail the build, others don't.
+
+| Tool             | Purpose | Fails build |
+|------------------|---------|-----------|
+| 🔨Maven Enforcer |Ensures minimum Java/Maven versions | ✅         |
+| ✔️ Checkstyle    |Ensures `google_checks` code style conformance | ✅         |
+| 🔍 PMD           | Static analysis | ❌         |
+| 🔍 SpotBugs      |Static analysis | ❌         |
+
 ## Removing the demo
 
 Countercheck is shipped with demo tests against Spring Petclinic. To remove that stuff you need to delete:
