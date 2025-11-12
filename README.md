@@ -41,6 +41,15 @@ To run the example tests against Spring PetClinic you'll also need Docker instal
 
 ## Usage
 
+### Getting started
+
+If you're running countercheck for the first time and want to see it in action, perform the following steps:
+
+1. Ensure Docker is running
+2. Run `mvn clean test -Dcountercheck.environment=local`
+3. Run `mvn site`
+4. Open `target/site/index.html`
+
 ## Phases
 
 Countercheck execution takes a four-phase approach.
@@ -87,7 +96,7 @@ Countercheck comes with extensive reporting at both high and low levels.
 
 Raw test execution reports are found post-execution in the `target` directory, e.g. `target/surefire-reports` or `target/playwright-traces`; these are designed to be ingested and evaluated by your CI/CD tooling (e.g. Jenkins) for build decisioning.
 
-To generate pretty reports in the `target/site` directory, use the `mvn site` command after your build completes (often performed in pipeline script's 'after' block). The top level report that links the rest is `target/site/index.html`.
+To generate pretty reports in the `target/site` directory, use the `mvn site` command after your build completes (often performed in a pipeline script's 'after' block). The top level report that links the rest is `target/site/index.html`.
 
 | Report              | Description                                                                            |
 |---------------------|----------------------------------------------------------------------------------------
