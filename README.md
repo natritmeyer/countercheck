@@ -156,12 +156,12 @@ output, that can help diagnosing difficult issues.
 Countercheck includes various tools that enable the measurement and enforcement of high quality test code. Some checks
 fail the build, others don't.
 
-| Tool             | Purpose                                        | Fails build |
-|------------------|------------------------------------------------|-------------|
-| 🔨Maven Enforcer | Ensures minimum Java/Maven versions            | ✅           |
-| ✔️ Checkstyle    | Ensures `google_checks` code style conformance | ✅           |
-| 🔍 PMD           | Static analysis                                | ❌           |
-| 🔍 SpotBugs      | Static analysis                                | ❌           |
+| Tool              | Purpose                                        | Fails build |
+|-------------------|------------------------------------------------|-------------|
+| 🔨 Maven Enforcer | Ensures minimum Java/Maven versions            | ✅           |
+| ✔️ Checkstyle     | Ensures `google_checks` code style conformance | ✅           |
+| 🔍 PMD            | Static analysis                                | ❌           |
+| 🔍 SpotBugs       | Static analysis                                | ❌           |
 
 ## Removing the demo
 
