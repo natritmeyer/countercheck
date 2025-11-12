@@ -1,7 +1,3 @@
-⚠️ _This README is a work in progress_ ⚠️
-
------
-
 # Countercheck
 
 _An example test automation framework built with Java, Junit5, Spring, WebTestClient, & Playwright_
