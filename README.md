@@ -77,6 +77,41 @@ If you're running countercheck for the first time and want to see it in action, 
 3. Run `$ mvn site`
 4. Open `target/site/index.html`
 
+### Commands
+
+Countercheck is built on maven, so standard maven commands and conventions apply.
+
+#### Executing tests
+
+* `$ mvn test` executes `**/*Test.java` classes
+* `$ mvn verify` executes `**/*Test.java` classes followed by `**/*IT.java` classes
+
+#### Running tests in specific environments
+
+Environment-specific config should be stored in eponymous property files in `src/test/resources/environments`. E.g. if
+you have a `staging` environment, create a `src/test/resources/environments/staging.properties` file and store the
+relevant properties in there, and then execute your tests against your staging environment by passing
+`-Dcountercheck.environment=staging` to the `mvn` command.
+
+The `countercheck.environment` property determines which `src/test/resources/environments/*.properties` file is read in.
+
+* `$ mvn test -Dcountercheck.environment=local` executes tests in your `local` environment
+* `$ mvn test -Dcountercheck.environment=staging` executes tests in your `staging` environment
+
+#### Overriding properties
+
+Any property set in a .properties file can be overridden on the command line. E.g. should you wish to change the default request timeout simply override the value on the command line:
+
+`$ mvn test -Dcountercheck.request.timeout=120`
+
+#### Playwright tracing
+
+Playwright-specific config can be found in `src/test/resources/playwright.properties`. To enable/disable playwright tracing set the `countercheck.playwright.tracing.enabled` value.
+
+#### Best practices
+
+* To ensure test execution independence, always begin execution with `clean`, e.g. `mvn clean test`
+
 ## Phases
 
 Countercheck execution takes a four-phase approach.
