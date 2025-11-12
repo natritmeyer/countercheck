@@ -100,13 +100,15 @@ The `countercheck.environment` property determines which `src/test/resources/env
 
 #### Overriding properties
 
-Any property set in a .properties file can be overridden on the command line. E.g. should you wish to change the default request timeout simply override the value on the command line:
+Any property set in a .properties file can be overridden on the command line. E.g. should you wish to change the default
+request timeout simply override the value on the command line:
 
 `$ mvn test -Dcountercheck.request.timeout=120`
 
 #### Playwright tracing
 
-Playwright-specific config can be found in `src/test/resources/playwright.properties`. To enable/disable playwright tracing set the `countercheck.playwright.tracing.enabled` value.
+Playwright-specific config can be found in `src/test/resources/playwright.properties`. To enable/disable playwright
+tracing set the `countercheck.playwright.tracing.enabled` value.
 
 #### Best practices
 
