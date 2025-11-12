@@ -44,7 +44,7 @@ Otherwise, install java &amp; maven however you like.
 
 | Tool  | Default version | Minimum version |
 |-------|-----------------|-----------------|
-| Java  | 24              | 17              |
+| Java  | 25              | 17              |
 | Maven | 3.9.11          | 3.6             |
 
 #### Changing toolchain versions

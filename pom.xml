@@ -33,7 +33,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <java.version>24</java.version>
+    <java.version>25</java.version>
 
     <junit.version>6.0.1</junit.version>
     <spring.version>6.2.12</spring.version>
