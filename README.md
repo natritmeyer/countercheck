@@ -33,6 +33,8 @@ Countercheck has a couple of intended uses:
 
 ## Installation
 
+Countercheck is configured as a _Template Repository_ in GitHub, so either click 'Use this template', or:
+
 1. Clone this repo
 2. Delete the `.git` directory
 3. Push the code to your own repo and customise as required
