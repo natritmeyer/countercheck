@@ -46,8 +46,8 @@ To run the example tests against Spring PetClinic you'll also need Docker instal
 If you're running countercheck for the first time and want to see it in action, perform the following steps:
 
 1. Ensure Docker is running
-2. Run `mvn clean test -Dcountercheck.environment=local`
-3. Run `mvn site`
+2. Run `$ mvn clean test -Dcountercheck.environment=local`
+3. Run `$ mvn site`
 4. Open `target/site/index.html`
 
 ## Phases
@@ -78,11 +78,11 @@ The current order is:
 
 Phases can be run individually, e.g:
 
-`mvn -P apitests`
+`$ mvn -P apitests`
 
 Phases can also be run in arbitrary collections, e.g:
 
-`mvn -P preflightchecks,apitests`
+`$ mvn -P preflightchecks,apitests`
 
 ### How to customise the phases
 
@@ -100,8 +100,8 @@ To generate pretty reports in the `target/site` directory, use the `mvn site` co
 
 | Report              | Description                                                                            |
 |---------------------|----------------------------------------------------------------------------------------
-| 📊 Surefire         | Test results from `**/*Test.java` classes executed by `mvn test` (JUnit/cucumber etc)  |
-| 📊 Failsafe         | Test results from `**/*IT.java` classes executed by `mvn verify`  (JUnit/cucumber etc) |
+| 📊 Surefire         | Test results from `**/*Test.java` classes executed by `$ mvn test` (JUnit/cucumber etc)  |
+| 📊 Failsafe         | Test results from `**/*IT.java` classes executed by `$ mvn verify`  (JUnit/cucumber etc) |
 | 📝 Playwright trace | Test execution traces in `target/playwright-traces`
 | 📹 Playwright video | Recorded test execution videos in `target/playwright-video`                            |
 
