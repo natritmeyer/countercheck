@@ -77,43 +77,37 @@ Phases can also be run in arbitrary collections, e.g:
 
 ### How to customise the phases
 
-Adding your own phase is trivial.
-
-## Opinionated configurations
-
-Countercheck is an opinionated framework; it enforces best practices where it can. However, should you want some flexibility these settings can be easily disabled/reconfigured.
-
-* 📄 **Editorconfig** - Countercheck includes an `.editorconfig` file that your IDE should pick up and use. It'll set your line endings to be LF, and your indentation to 2-space for Java and XML (i.e. your pom.xml) files.
-
-### Maven's `validate` phase
-
-Before tests are executed countercheck will run a collection of checks, and will fail the build should the checks fail.
-
-* 📄 **Checkstyle** - Checkstyle will verify whether your code meets the `google_checks.xml` style rules and fails the build on any warning. The configuration can be found in the `maven-checkstyle-plugin` section of the `pom.xml` file.
-* 📄 **Toolchain versions** - The `maven-enforcer-plugin` is configured to check for minimum versions of java and maven.
-
-### Diagnostics output
-
-Countercheck configuration is set up with the approach that when a test execution run fails, the more information you have about what happened the better.
-
-#### Maven
-
-Configuration found in `.mvn/maven.config`:
-
-* **Maven version information** - Each maven execution will begin its console output with details of the maven instance being used (version, home, associated java version)
-* **Timestamped console output** - Every line of maven console output is timestamped
-
-Configuration found in the `pom.xml` file:
-
-* **Active profile display** - The `maven-help-plugin` is configured to output a list of active maven profiles. Since test phases are controlled by profiles, you're essentially getting a list of the test phases being executed in this run.
-* **Effective POM generator** - Every maven execution will generate an `effective-pom.xml` file which is useful when debugging maven configuration problems.
-* **Dependency version information**
+Customising phases is a matter of editing the `profiles` section of the `pom.xml`.
 
 ## Reporting
 
-Output from the various countercheck components is dialled up to
+Countercheck comes with extensive reporting at both high and low levels.
 
-* Every line of console output from maven is timestamped (see `/.mvn/maven.config`)
+#### 📊 High level reporting
+
+Raw test execution reports are found post-execution in the `target` directory, e.g. `target/surefire-reports` or `target/playwright-traces`; these are designed to be ingested and evaluated by your CI/CD tooling (e.g. Jenkins) for build decisioning.
+
+To generate pretty reports in the `target/site` directory, use the `mvn site` command after your build completes (often performed in pipeline script's 'after' block). The top level report that links the rest is `target/site/index.html`.
+
+| Report              | Description                                                                            |
+|---------------------|----------------------------------------------------------------------------------------
+| 📊 Surefire         | Test results from `**/*Test.java` classes executed by `mvn test` (JUnit/cucumber etc)  |
+| 📊 Failsafe         | Test results from `**/*IT.java` classes executed by `mvn verify`  (JUnit/cucumber etc) |
+| 📝 Playwright trace | Test execution traces in `target/playwright-traces`
+| 📹 Playwright video | Recorded test execution videos in `target/playwright-video`                            |
+
+#### 🔬 Low-level reporting
+
+Countercheck is made up of many components, each of which contributes low-level information, mainly to the console output, that can help diagnosing difficult issues.
+
+| Type                                                  |Component| Usage                                               |
+|-------------------------------------------------------|--|-----------------------------------------------------|
+| 🖥️ Each line timestamped                             | `.mvn/maven.config` setting | Diagnose timing issues                              |
+| 🖥️ Java &amp; Maven version at top of console output | `.mvn/maven.config` setting | Diagnose version mismatches                         |
+| 🖥️ Planned phase execution                           | `maven-help-plugin` config| Ensure expected phases are selected for execution   |
+| 🖥️ Effective POM                                     | `maven-help-plugin` config| Diagnose dependency &amp; plugin version mismatches |
+| 🖥️ Dependency &amp; plugin versions                  |`versions-maven-plugin` config| Ensure expected versions                            |
+| 🖥️ Available dependency &amp; plugin updates         |`versions-maven-plugin` config|Be aware of required framework maintenance|
 
 ## Removing the demo
 

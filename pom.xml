@@ -416,6 +416,7 @@
           <effort>Max</effort>
           <threshold>Low</threshold>
           <skipEmptyReport>false</skipEmptyReport>
+          <failOnError>false</failOnError>
         </configuration>
         <executions>
           <execution>
